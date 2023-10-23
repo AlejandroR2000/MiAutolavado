@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:miautolavado/paginas/pagina_login.dart';
+import 'package:miautolavado/paginas/pagina_recuperarContra.dart';
 import 'package:miautolavado/paginas/pagina_registro.dart';
 
 
@@ -8,7 +9,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key}); //ESTOY PROBANDO
+  const MyApp({super.key}); //
 
   // This widget is the root of your application.
   @override
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         'Home': (BuildContext context) => PaginaLogin(),
         'Registro': (BuildContext context) => PaginaRegistro(),
+        'RecuperarContraseña': (BuildContext context) => PaginaRecuperarContra(),
       },
     );
   }

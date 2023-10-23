@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:miautolavado/paginas/pagina_login.dart';
+
 
 class PaginaRegistro extends StatefulWidget {
   const PaginaRegistro({super.key});
 
   @override
-  _PaginaRegistro createState() => _PaginaRegistro();
+  State<PaginaRegistro> createState() => _PaginaRegistro();
 }
 
 class _PaginaRegistro extends State<PaginaRegistro> {
@@ -14,7 +14,7 @@ class _PaginaRegistro extends State<PaginaRegistro> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
+        const Text(
           'Nombre',
           style: TextStyle(
             color: Colors.white,
@@ -23,13 +23,13 @@ class _PaginaRegistro extends State<PaginaRegistro> {
             fontSize: 16,
           ),
         ),
-        SizedBox(height: 1.0),
+        const SizedBox(height: 1.0),
         Container(
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(
-            color: Color(0xFFD9D9D9),
+            color: const Color(0xFFD9D9D9),
             borderRadius: BorderRadius.circular(10.0),
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                 color: Colors.black,
                 blurRadius: 6.0,
@@ -38,7 +38,7 @@ class _PaginaRegistro extends State<PaginaRegistro> {
             ],
           ),
           height: 45.0,
-          child: TextField(
+          child: const TextField(
             keyboardType: TextInputType.name,
             style: TextStyle(
               color: Colors.black,
@@ -67,7 +67,7 @@ class _PaginaRegistro extends State<PaginaRegistro> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
+        const Text(
           'Apellido',
           style: TextStyle(
             color: Colors.white,
@@ -76,13 +76,13 @@ class _PaginaRegistro extends State<PaginaRegistro> {
             fontSize: 16,
           ),
         ),
-        SizedBox(height: 1.0),
+        const SizedBox(height: 1.0),
         Container(
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(
-            color: Color(0xFFD9D9D9),
+            color: const Color(0xFFD9D9D9),
             borderRadius: BorderRadius.circular(10.0),
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                 color: Colors.black,
                 blurRadius: 6.0,
@@ -91,7 +91,7 @@ class _PaginaRegistro extends State<PaginaRegistro> {
             ],
           ),
           height: 45.0,
-          child: TextField(
+          child: const TextField(
             keyboardType: TextInputType.name,
             style: TextStyle(
               color: Colors.black,
@@ -120,7 +120,7 @@ class _PaginaRegistro extends State<PaginaRegistro> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
+        const Text(
           'Correo',
           style: TextStyle(
             color: Colors.white,
@@ -129,13 +129,13 @@ class _PaginaRegistro extends State<PaginaRegistro> {
             fontSize: 16,
           ),
         ),
-        SizedBox(height: 1.0),
+        const SizedBox(height: 1.0),
         Container(
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(
-            color: Color(0xFFD9D9D9),
+            color: const Color(0xFFD9D9D9),
             borderRadius: BorderRadius.circular(10.0),
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                 color: Colors.black,
                 blurRadius: 6.0,
@@ -144,7 +144,7 @@ class _PaginaRegistro extends State<PaginaRegistro> {
             ],
           ),
           height: 45.0,
-          child: TextField(
+          child: const TextField(
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
               color: Colors.black,
@@ -157,7 +157,7 @@ class _PaginaRegistro extends State<PaginaRegistro> {
                 Icons.email,
                 color: Colors.white,
               ),
-              hintText: 'Introduce tu correo',
+              hintText: 'Introduce tu correo electronico',
               hintStyle: TextStyle(
                 color: Colors.black,
                 fontFamily: 'OpenSans',
@@ -173,7 +173,7 @@ class _PaginaRegistro extends State<PaginaRegistro> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
+        const Text(
           'Telefono',
           style: TextStyle(
             color: Colors.white,
@@ -182,13 +182,13 @@ class _PaginaRegistro extends State<PaginaRegistro> {
             fontSize: 16,
           ),
         ),
-        SizedBox(height: 1.0),
+        const SizedBox(height: 1.0),
         Container(
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(
-            color: Color(0xFFD9D9D9),
+            color: const Color(0xFFD9D9D9),
             borderRadius: BorderRadius.circular(10.0),
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                 color: Colors.black,
                 blurRadius: 6.0,
@@ -197,7 +197,7 @@ class _PaginaRegistro extends State<PaginaRegistro> {
             ],
           ),
           height: 45.0,
-          child: TextField(
+          child: const TextField(
             keyboardType: TextInputType.phone,
             style: TextStyle(
               color: Colors.black,
@@ -226,7 +226,7 @@ class _PaginaRegistro extends State<PaginaRegistro> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
+        const Text(
           'Contraseña',
           style: TextStyle(
             color: Colors.white,
@@ -235,13 +235,13 @@ class _PaginaRegistro extends State<PaginaRegistro> {
             fontSize: 16,
           ),
         ),
-        SizedBox(height: 1.0),
+        const SizedBox(height: 1.0),
         Container(
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(
-            color: Color(0xFFD9D9D9),
+            color: const Color(0xFFD9D9D9),
             borderRadius: BorderRadius.circular(10.0),
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                 color: Colors.black,
                 blurRadius: 6.0,
@@ -250,7 +250,7 @@ class _PaginaRegistro extends State<PaginaRegistro> {
             ],
           ),
           height: 45.0,
-          child: TextField(
+          child: const TextField(
             keyboardType: TextInputType.emailAddress,
             obscureText: true,
             style: TextStyle(
@@ -278,23 +278,23 @@ class _PaginaRegistro extends State<PaginaRegistro> {
 
   Widget _buildBtnRegistro() {
     return Container(
-      padding: EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8.0),
       width: 257,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-            backgroundColor: Color(0xFF00FFC2),
+            backgroundColor: const Color(0xFF00FFC2),
             //background color of button
-            side: BorderSide(width: 1, color: Colors.black),
+            side: const BorderSide(width: 1, color: Colors.black),
             //border width and color
             elevation: 3,
             //elevation of button
             shape: RoundedRectangleBorder(
               //to set border radius to button
                 borderRadius: BorderRadius.circular(10)),
-            padding: EdgeInsets.all(10) //content padding inside button
+            padding: const EdgeInsets.all(10) //content padding inside button
         ),
         onPressed: () => print('Login Button Pressed'),
-        child: Text(
+        child: const Text(
           'Registrarse',
           style: TextStyle(
             color: Color(0xFF312D2D),
@@ -309,7 +309,7 @@ class _PaginaRegistro extends State<PaginaRegistro> {
   }
 
   Widget _buildRegistrarsecon() {
-    return Column(
+    return const Column(
       children: <Widget>[
         Text(
           '- O -',
@@ -340,7 +340,7 @@ class _PaginaRegistro extends State<PaginaRegistro> {
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: Colors.white,
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               color: Colors.black26,
               offset: Offset(0, 2),
@@ -357,19 +357,19 @@ class _PaginaRegistro extends State<PaginaRegistro> {
 
   Widget _buildSocialBtnRow() {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 15.0),
+      padding: const EdgeInsets.symmetric(vertical: 15.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           _buildSocialBtn(
                 () => print('Login with Facebook'),
-            AssetImage(
+            const AssetImage(
               'imagenes/facebook.jpg',
             ),
           ),
           _buildSocialBtn(
                 () => print('Login with Google'),
-            AssetImage(
+            const AssetImage(
               'imagenes/google.jpg',
             ),
           ),
@@ -384,7 +384,7 @@ class _PaginaRegistro extends State<PaginaRegistro> {
         Navigator.pop(context)
       },
       child: RichText(
-        text: TextSpan(
+        text: const TextSpan(
           children: [
             TextSpan(
               text: '¿Ya tienes una cuenta? ',
@@ -414,10 +414,10 @@ class _PaginaRegistro extends State<PaginaRegistro> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(color: Colors.white,),
-        backgroundColor: Color(0xFF109ADA),
+        leading: const BackButton(color: Colors.white,),
+        backgroundColor: const Color(0xFF109ADA),
         centerTitle: true,
-        title: Text("REGISTRO",
+        title: const Text("REGISTRO",
           style: TextStyle(
             color: Colors.white,
             fontFamily: 'OpenSans',
@@ -426,7 +426,7 @@ class _PaginaRegistro extends State<PaginaRegistro> {
           ),
         ),
       ),
-      backgroundColor: Color(0xFF109ADA),
+      backgroundColor: const Color(0xFF109ADA),
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
         child: GestureDetector(
@@ -436,8 +436,8 @@ class _PaginaRegistro extends State<PaginaRegistro> {
               Container(
                 height: double.infinity,
                 child: SingleChildScrollView(
-                  physics: AlwaysScrollableScrollPhysics(),
-                  padding: EdgeInsets.symmetric(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 40.0,
                     vertical: 10.0,
                   ),
@@ -449,17 +449,17 @@ class _PaginaRegistro extends State<PaginaRegistro> {
                         width: 90,
                         child: Image.asset('imagenes/registro.png'),
                       ),
-                      SizedBox(height: 9.0),
+                      const SizedBox(height: 9.0),
                       _buildNombre(),
-                      SizedBox(height: 9.0,),
+                      const SizedBox(height: 9.0,),
                       _buildApellido(),
-                      SizedBox(height: 9.0,),
+                      const SizedBox(height: 9.0,),
                       _buildTelefono(),
-                      SizedBox(height: 9.0,),
+                      const SizedBox(height: 9.0,),
                       _buildCorreo(),
-                      SizedBox(height: 9.0,),
+                      const SizedBox(height: 9.0,),
                       _buildContrasena(),
-                      SizedBox(height: 9.0,),
+                      const SizedBox(height: 9.0,),
                       _buildBtnRegistro(),
                       _buildRegistrarsecon(),
                       _buildSocialBtnRow(),

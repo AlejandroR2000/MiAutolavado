@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:miautolavado/paginas/pagina_recuperarContra.dart';
 import 'package:miautolavado/paginas/pagina_registro.dart';
 
 
 
 class PaginaLogin extends StatefulWidget {
+  const PaginaLogin({super.key});
   @override
-  _PaginaLogin createState() => _PaginaLogin();
+  State<PaginaLogin> createState() => _PaginaLogin();
 }
 
 class _PaginaLogin extends State<PaginaLogin> {
@@ -16,7 +18,7 @@ class _PaginaLogin extends State<PaginaLogin> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
+        const Text(
           'Correo',
           style: TextStyle(
             color: Colors.white,
@@ -25,13 +27,13 @@ class _PaginaLogin extends State<PaginaLogin> {
             fontSize: 16,
           ),
         ),
-        SizedBox(height: 1.0),
+        const SizedBox(height: 1.0),
         Container(
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(
-            color: Color(0xFFD9D9D9),
+            color: const Color(0xFFD9D9D9),
             borderRadius: BorderRadius.circular(10.0),
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                 color: Colors.black,
                 blurRadius: 6.0,
@@ -40,7 +42,7 @@ class _PaginaLogin extends State<PaginaLogin> {
             ],
           ),
           height: 45.0,
-          child: TextField(
+          child: const TextField(
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
               color: Colors.black,
@@ -53,7 +55,7 @@ class _PaginaLogin extends State<PaginaLogin> {
                 Icons.email,
                 color: Colors.white,
               ),
-              hintText: 'Introduce tu correo',
+              hintText: 'Introduce tu correo electronico',
               hintStyle: TextStyle(
                 color: Colors.black,
                 fontFamily: 'OpenSans',
@@ -69,7 +71,7 @@ class _PaginaLogin extends State<PaginaLogin> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
+        const Text(
           'Contraseña',
           style: TextStyle(
             color: Colors.white,
@@ -78,13 +80,13 @@ class _PaginaLogin extends State<PaginaLogin> {
             fontSize: 16,
           ),
         ),
-        SizedBox(height: 1.0),
+        const SizedBox(height: 1.0),
         Container(
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(
-            color: Color(0xFFD9D9D9),
+            color: const Color(0xFFD9D9D9),
             borderRadius: BorderRadius.circular(10.0),
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                 color: Colors.black,
                 blurRadius: 6.0,
@@ -93,7 +95,7 @@ class _PaginaLogin extends State<PaginaLogin> {
             ],
           ),
           height: 45.0,
-          child: TextField(
+          child: const TextField(
             keyboardType: TextInputType.emailAddress,
             obscureText: true,
             style: TextStyle(
@@ -123,8 +125,12 @@ class _PaginaLogin extends State<PaginaLogin> {
     return Container(
       alignment: Alignment.centerRight,
       child: TextButton(
-        onPressed: () => print('Forgot Password Button Pressed'),
-        child: Text(
+        onPressed: () => {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const PaginaRecuperarContra())
+          )
+        },
+        child: const Text(
           '¿Olvidaste tu contraseña?',
           style: TextStyle(
             color: Colors.white,
@@ -154,7 +160,7 @@ class _PaginaLogin extends State<PaginaLogin> {
               },
             ),
           ),
-          Text(
+          const Text(
             'Recordar usuario',
             style: TextStyle(
               color: Colors.white,
@@ -171,23 +177,23 @@ class _PaginaLogin extends State<PaginaLogin> {
 
 
     return Container(
-      padding: EdgeInsets.all(18.0),
+      padding: const EdgeInsets.all(18.0),
       width: 257,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-            backgroundColor: Color(0xFF00FFC2),
+            backgroundColor: const Color(0xFF00FFC2),
             //background color of button
-            side: BorderSide(width: 1, color: Colors.black),
+            side: const BorderSide(width: 1, color: Colors.black),
             //border width and color
             elevation: 3,
             //elevation of button
             shape: RoundedRectangleBorder(
                 //to set border radius to button
                 borderRadius: BorderRadius.circular(10)),
-            padding: EdgeInsets.all(10) //content padding inside button
+            padding: const EdgeInsets.all(10) //content padding inside button
             ),
         onPressed: () => print('Login Button Pressed'),
-        child: Text(
+        child: const Text(
           'Iniciar sesion',
           style: TextStyle(
             color: Color(0xFF312D2D),
@@ -202,7 +208,7 @@ class _PaginaLogin extends State<PaginaLogin> {
   }
 
   Widget _buildSignInWithText() {
-    return Column(
+    return const Column(
       children: <Widget>[
         Text(
           '- O -',
@@ -233,7 +239,7 @@ class _PaginaLogin extends State<PaginaLogin> {
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: Colors.white,
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               color: Colors.black26,
               offset: Offset(0, 2),
@@ -250,19 +256,19 @@ class _PaginaLogin extends State<PaginaLogin> {
 
   Widget _buildSocialBtnRow() {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 30.0),
+      padding: const EdgeInsets.symmetric(vertical: 30.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           _buildSocialBtn(
              () => print('Login with Facebook'),
-            AssetImage(
+            const AssetImage(
               'imagenes/facebook.jpg',
             ),
           ),
           _buildSocialBtn(
             () => print('Login with Google'),
-            AssetImage(
+            const AssetImage(
               'imagenes/google.jpg',
             ),
           ),
@@ -275,11 +281,11 @@ class _PaginaLogin extends State<PaginaLogin> {
     return GestureDetector(
       onTap: () => {
         Navigator.push(context, 
-          MaterialPageRoute(builder: (context) => PaginaRegistro())
+          MaterialPageRoute(builder: (context) => const PaginaRegistro())
         )
       },
       child: RichText(
-        text: TextSpan(
+        text: const TextSpan(
           children: [
             TextSpan(
               text: '¿No tienes cuenta? ',
@@ -306,7 +312,7 @@ class _PaginaLogin extends State<PaginaLogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF109ADA),
+      backgroundColor: const Color(0xFF109ADA),
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
         child: GestureDetector(
@@ -316,8 +322,8 @@ class _PaginaLogin extends State<PaginaLogin> {
               Container(
                 height: double.infinity,
                 child: SingleChildScrollView(
-                  physics: AlwaysScrollableScrollPhysics(),
-                  padding: EdgeInsets.symmetric(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 40.0,
                     vertical: 20.0,
                   ),
@@ -329,7 +335,7 @@ class _PaginaLogin extends State<PaginaLogin> {
                         width: 400,
                         child: Image.asset('imagenes/lavado.gif'),
                       ),
-                      Text(
+                      const Text(
                         'INICIO DE SESION',
                         style: TextStyle(
                           color: Colors.white,
@@ -338,9 +344,9 @@ class _PaginaLogin extends State<PaginaLogin> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 20.0),
+                      const SizedBox(height: 20.0),
                       _buildEmailTF(),
-                      SizedBox(
+                      const SizedBox(
                         height: 20.0,
                       ),
                       _buildPasswordTF(),
