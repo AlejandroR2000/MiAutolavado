@@ -1,17 +1,122 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:miautolavado/paginas/pagina_registro.dart';
+import 'package:miautolavado/paginas/pagina_login.dart';
 
+class PaginaRegistro extends StatefulWidget {
+  const PaginaRegistro({super.key});
 
-class PaginaLogin extends StatefulWidget {
   @override
-  _PaginaLogin createState() => _PaginaLogin();
+  _PaginaRegistro createState() => _PaginaRegistro();
 }
 
-class _PaginaLogin extends State<PaginaLogin> {
-  bool _rememberMe = false;
+class _PaginaRegistro extends State<PaginaRegistro> {
+  Widget _buildNombre() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          'Nombre',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Inter',
+            fontSize: 16,
+          ),
+        ),
+        SizedBox(height: 1.0),
+        Container(
+          alignment: Alignment.centerLeft,
+          decoration: BoxDecoration(
+            color: Color(0xFFD9D9D9),
+            borderRadius: BorderRadius.circular(10.0),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black,
+                blurRadius: 6.0,
+                offset: Offset(0, 2),
+              ),
+            ],
+          ),
+          height: 45.0,
+          child: TextField(
+            keyboardType: TextInputType.name,
+            style: TextStyle(
+              color: Colors.black,
+              fontFamily: 'OpenSans',
+            ),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.only(top: 7.0),
+              prefixIcon: Icon(
+                Icons.account_box,
+                color: Colors.white,
+              ),
+              hintText: 'Introduce tu nombre',
+              hintStyle: TextStyle(
+                color: Colors.black,
+                fontFamily: 'OpenSans',
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
 
-  Widget _buildEmailTF() {
+  Widget _buildApellido() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          'Apellido',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Inter',
+            fontSize: 16,
+          ),
+        ),
+        SizedBox(height: 1.0),
+        Container(
+          alignment: Alignment.centerLeft,
+          decoration: BoxDecoration(
+            color: Color(0xFFD9D9D9),
+            borderRadius: BorderRadius.circular(10.0),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black,
+                blurRadius: 6.0,
+                offset: Offset(0, 2),
+              ),
+            ],
+          ),
+          height: 45.0,
+          child: TextField(
+            keyboardType: TextInputType.name,
+            style: TextStyle(
+              color: Colors.black,
+              fontFamily: 'OpenSans',
+            ),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.only(top: 7.0),
+              prefixIcon: Icon(
+                Icons.account_box,
+                color: Colors.white,
+              ),
+              hintText: 'Introduce tu apellido',
+              hintStyle: TextStyle(
+                color: Colors.black,
+                fontFamily: 'OpenSans',
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildCorreo() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -64,7 +169,60 @@ class _PaginaLogin extends State<PaginaLogin> {
     );
   }
 
-  Widget _buildPasswordTF() {
+  Widget _buildTelefono() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          'Telefono',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Inter',
+            fontSize: 16,
+          ),
+        ),
+        SizedBox(height: 1.0),
+        Container(
+          alignment: Alignment.centerLeft,
+          decoration: BoxDecoration(
+            color: Color(0xFFD9D9D9),
+            borderRadius: BorderRadius.circular(10.0),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black,
+                blurRadius: 6.0,
+                offset: Offset(0, 2),
+              ),
+            ],
+          ),
+          height: 45.0,
+          child: TextField(
+            keyboardType: TextInputType.phone,
+            style: TextStyle(
+              color: Colors.black,
+              fontFamily: 'OpenSans',
+            ),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.only(top: 7.0),
+              prefixIcon: Icon(
+                Icons.phone,
+                color: Colors.white,
+              ),
+              hintText: 'Introduce tu telefono',
+              hintStyle: TextStyle(
+                color: Colors.black,
+                fontFamily: 'OpenSans',
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildContrasena() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -118,59 +276,9 @@ class _PaginaLogin extends State<PaginaLogin> {
     );
   }
 
-  Widget _buildForgotPasswordBtn() {
+  Widget _buildBtnRegistro() {
     return Container(
-      alignment: Alignment.centerRight,
-      child: TextButton(
-        onPressed: () => print('Forgot Password Button Pressed'),
-        child: Text(
-          '¿Olvidaste tu contraseña?',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 15.0,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildRememberMeCheckbox() {
-    return Container(
-      height: 20.0,
-      child: Row(
-        children: <Widget>[
-          Theme(
-            data: ThemeData(unselectedWidgetColor: Colors.white),
-            child: Checkbox(
-              value: _rememberMe,
-              checkColor: Colors.black,
-              activeColor: Colors.lightGreenAccent,
-              onChanged: (value) {
-                setState(() {
-                  _rememberMe = value!;
-                });
-              },
-            ),
-          ),
-          Text(
-            'Recordar usuario',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'Inter',
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildLoginBtn() {
-
-
-    return Container(
-      padding: EdgeInsets.all(18.0),
+      padding: EdgeInsets.all(8.0),
       width: 257,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -181,13 +289,13 @@ class _PaginaLogin extends State<PaginaLogin> {
             elevation: 3,
             //elevation of button
             shape: RoundedRectangleBorder(
-                //to set border radius to button
+              //to set border radius to button
                 borderRadius: BorderRadius.circular(10)),
             padding: EdgeInsets.all(10) //content padding inside button
-            ),
+        ),
         onPressed: () => print('Login Button Pressed'),
         child: Text(
-          'Iniciar sesion',
+          'Registrarse',
           style: TextStyle(
             color: Color(0xFF312D2D),
             letterSpacing: 1.5,
@@ -200,7 +308,7 @@ class _PaginaLogin extends State<PaginaLogin> {
     );
   }
 
-  Widget _buildSignInWithText() {
+  Widget _buildRegistrarsecon() {
     return Column(
       children: <Widget>[
         Text(
@@ -210,9 +318,9 @@ class _PaginaLogin extends State<PaginaLogin> {
             fontWeight: FontWeight.w400,
           ),
         ),
-        SizedBox(height: 15.0),
+        SizedBox(height: 10.0),
         Text(
-          'Inicia sesion con',
+          'Registrate con',
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -249,18 +357,18 @@ class _PaginaLogin extends State<PaginaLogin> {
 
   Widget _buildSocialBtnRow() {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 30.0),
+      padding: EdgeInsets.symmetric(vertical: 15.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           _buildSocialBtn(
-             () => print('Login with Facebook'),
+                () => print('Login with Facebook'),
             AssetImage(
               'imagenes/facebook.jpg',
             ),
           ),
           _buildSocialBtn(
-            () => print('Login with Google'),
+                () => print('Login with Google'),
             AssetImage(
               'imagenes/google.jpg',
             ),
@@ -270,18 +378,18 @@ class _PaginaLogin extends State<PaginaLogin> {
     );
   }
 
-  Widget _buildSignupBtn() {
+  Widget _buildLogueate() {
     return GestureDetector(
       onTap: (){
         final route = MaterialPageRoute(
-            builder: (context) => PaginaRegistro());
+            builder: (context) => PaginaLogin());
         Navigator.push(context, route);
       },
       child: RichText(
         text: TextSpan(
           children: [
             TextSpan(
-              text: '¿No tienes cuenta? ',
+              text: '¿Ya tienes una cuenta? ',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 18.0,
@@ -289,7 +397,7 @@ class _PaginaLogin extends State<PaginaLogin> {
               ),
             ),
             TextSpan(
-              text: 'Registrate',
+              text: 'Logueate',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 18.0,
@@ -301,6 +409,8 @@ class _PaginaLogin extends State<PaginaLogin> {
       ),
     );
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -318,18 +428,13 @@ class _PaginaLogin extends State<PaginaLogin> {
                   physics: AlwaysScrollableScrollPhysics(),
                   padding: EdgeInsets.symmetric(
                     horizontal: 40.0,
-                    vertical: 20.0,
+                    vertical: 50.0,
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(
-                        height: 220,
-                        width: 400,
-                        child: Image.asset('imagenes/lavado.gif'),
-                      ),
                       Text(
-                        'INICIO DE SESION',
+                        'REGISTRO',
                         style: TextStyle(
                           color: Colors.white,
                           fontFamily: 'OpenSans',
@@ -337,18 +442,26 @@ class _PaginaLogin extends State<PaginaLogin> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 20.0),
-                      _buildEmailTF(),
                       SizedBox(
-                        height: 20.0,
+                        height: 110,
+                        width: 100,
+                        child: Image.asset('imagenes/registro.png'),
                       ),
-                      _buildPasswordTF(),
-                      _buildForgotPasswordBtn(),
-                      _buildRememberMeCheckbox(),
-                      _buildLoginBtn(),
-                      _buildSignInWithText(),
+                      SizedBox(height: 9.0),
+                      _buildNombre(),
+                      SizedBox(height: 9.0,),
+                      _buildApellido(),
+                      SizedBox(height: 9.0,),
+                      _buildTelefono(),
+                      SizedBox(height: 9.0,),
+                      _buildCorreo(),
+                      SizedBox(height: 9.0,),
+                      _buildContrasena(),
+                      SizedBox(height: 9.0,),
+                      _buildBtnRegistro(),
+                      _buildRegistrarsecon(),
                       _buildSocialBtnRow(),
-                      _buildSignupBtn(),
+                      _buildLogueate()
                     ],
                   ),
                 ),

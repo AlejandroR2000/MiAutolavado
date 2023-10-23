@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:miautolavado/paginas/pagina_login.dart';
+import 'package:miautolavado/paginas/pagina_registro.dart';
 
 
 void main() {
@@ -13,12 +14,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'MiAutoLavado',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: PaginaLogin(),
+      initialRoute: 'Home',
+      routes: <String, WidgetBuilder>{
+        'Home': (BuildContext context) => PaginaLogin(),
+        'Registro': (BuildContext context) => PaginaRegistro(),
+      },
     );
   }
 }
