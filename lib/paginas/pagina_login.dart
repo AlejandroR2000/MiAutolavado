@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:miautolavado/paginas/pagina_registro.dart';
 
 
+
 class PaginaLogin extends StatefulWidget {
   @override
   _PaginaLogin createState() => _PaginaLogin();
@@ -272,10 +273,10 @@ class _PaginaLogin extends State<PaginaLogin> {
 
   Widget _buildSignupBtn() {
     return GestureDetector(
-      onTap: (){
-        final route = MaterialPageRoute(
-            builder: (context) => PaginaRegistro());
-        Navigator.push(context, route);
+      onTap: ()=>{
+        Navigator.push(context, 
+          MaterialPageRoute(builder: (context) => PaginaRegistro())
+        )
       },
       child: RichText(
         text: TextSpan(

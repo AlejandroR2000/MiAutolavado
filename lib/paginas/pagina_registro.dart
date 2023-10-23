@@ -415,6 +415,19 @@ class _PaginaRegistro extends State<PaginaRegistro> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: BackButton(color: Colors.white,),
+        backgroundColor: Color(0xFF109ADA),
+        centerTitle: true,
+        title: Text("REGISTRO",
+          style: TextStyle(
+            color: Colors.white,
+            fontFamily: 'OpenSans',
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
       backgroundColor: Color(0xFF109ADA),
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
@@ -428,23 +441,14 @@ class _PaginaRegistro extends State<PaginaRegistro> {
                   physics: AlwaysScrollableScrollPhysics(),
                   padding: EdgeInsets.symmetric(
                     horizontal: 40.0,
-                    vertical: 50.0,
+                    vertical: 10.0,
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        'REGISTRO',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'OpenSans',
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
                       SizedBox(
-                        height: 110,
-                        width: 100,
+                        height: 90,
+                        width: 90,
                         child: Image.asset('imagenes/registro.png'),
                       ),
                       SizedBox(height: 9.0),
