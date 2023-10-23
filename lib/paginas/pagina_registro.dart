@@ -380,10 +380,8 @@ class _PaginaRegistro extends State<PaginaRegistro> {
 
   Widget _buildLogueate() {
     return GestureDetector(
-      onTap: (){
-        final route = MaterialPageRoute(
-            builder: (context) => PaginaLogin());
-        Navigator.push(context, route);
+      onTap: () => {
+        Navigator.pop(context)
       },
       child: RichText(
         text: TextSpan(

@@ -273,7 +273,7 @@ class _PaginaLogin extends State<PaginaLogin> {
 
   Widget _buildSignupBtn() {
     return GestureDetector(
-      onTap: ()=>{
+      onTap: () => {
         Navigator.push(context, 
           MaterialPageRoute(builder: (context) => PaginaRegistro())
         )
