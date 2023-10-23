@@ -68,7 +68,6 @@ class _PaginaRecuperarContraState extends State<PaginaRecuperarContra> {
   Widget _buildBtnRecuperar() {
     return Container(
       padding: const EdgeInsets.all(8.0),
-      width: 270,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
             backgroundColor: const Color(0xFF00FFC2),
@@ -80,7 +79,7 @@ class _PaginaRecuperarContraState extends State<PaginaRecuperarContra> {
             shape: RoundedRectangleBorder(
               //to set border radius to button
                 borderRadius: BorderRadius.circular(10)),
-            padding: const EdgeInsets.all(10) //content padding inside button
+            padding: const EdgeInsets.all(12) //content padding inside button
         ),
         onPressed: () => print('Login Button Pressed'),
         child: const Text(
