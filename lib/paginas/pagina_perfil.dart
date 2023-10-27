@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-
-class PaginaRegistro extends StatefulWidget {
-  const PaginaRegistro({super.key});
+class PaginaPerfil extends StatefulWidget {
+  const PaginaPerfil({super.key});
 
   @override
-  State<PaginaRegistro> createState() => _PaginaRegistro();
+  State<PaginaPerfil> createState() => _PaginaPerfilState();
 }
 
-class _PaginaRegistro extends State<PaginaRegistro> {
+class _PaginaPerfilState extends State<PaginaPerfil> {
 
   Widget _buildNombre() {
     return Column(
@@ -18,7 +17,7 @@ class _PaginaRegistro extends State<PaginaRegistro> {
         const Text(
           'Nombre',
           style: TextStyle(
-            color: Colors.white,
+            color: Colors.black,
             fontWeight: FontWeight.bold,
             fontFamily: 'Inter',
             fontSize: 16,
@@ -71,7 +70,7 @@ class _PaginaRegistro extends State<PaginaRegistro> {
         const Text(
           'Apellido',
           style: TextStyle(
-            color: Colors.white,
+            color: Colors.black,
             fontWeight: FontWeight.bold,
             fontFamily: 'Inter',
             fontSize: 16,
@@ -124,7 +123,7 @@ class _PaginaRegistro extends State<PaginaRegistro> {
         const Text(
           'Correo',
           style: TextStyle(
-            color: Colors.white,
+            color: Colors.black,
             fontWeight: FontWeight.bold,
             fontFamily: 'Inter',
             fontSize: 16,
@@ -177,7 +176,7 @@ class _PaginaRegistro extends State<PaginaRegistro> {
         const Text(
           'Telefono',
           style: TextStyle(
-            color: Colors.white,
+            color: Colors.black,
             fontWeight: FontWeight.bold,
             fontFamily: 'Inter',
             fontSize: 16,
@@ -230,7 +229,7 @@ class _PaginaRegistro extends State<PaginaRegistro> {
         const Text(
           'Contraseña',
           style: TextStyle(
-            color: Colors.white,
+            color: Colors.black,
             fontWeight: FontWeight.bold,
             fontFamily: 'Inter',
             fontSize: 16,
@@ -283,7 +282,7 @@ class _PaginaRegistro extends State<PaginaRegistro> {
       width: 257,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFF00FFC2),
+            backgroundColor: const Color(0xFFF8AF42),
             //background color of button
             side: const BorderSide(width: 1, color: Colors.black),
             //border width and color
@@ -296,7 +295,7 @@ class _PaginaRegistro extends State<PaginaRegistro> {
         ),
         onPressed: () => print('Login Button Pressed'),
         child: const Text(
-          'Registrarse',
+          'Guardar datos',
           style: TextStyle(
             color: Color(0xFF312D2D),
             letterSpacing: 1.5,
@@ -309,105 +308,10 @@ class _PaginaRegistro extends State<PaginaRegistro> {
     );
   }
 
-  Widget _buildRegistrarsecon() {
-    return const Column(
-      children: <Widget>[
-        Text(
-          '- O -',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-        SizedBox(height: 10.0),
-        Text(
-          'Registrate con',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'Inter',
-          ),
-        ),
-      ],
-    );
-  }
 
-  Widget _buildSocialBtn(Function onTap, AssetImage logo) {
-    return GestureDetector(
-      onTap: (){ onTap();},
-      child: Container(
-        height: 60.0,
-        width: 60.0,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.white,
-          boxShadow: const [
-            BoxShadow(
-              color: Colors.black26,
-              offset: Offset(0, 2),
-              blurRadius: 6.0,
-            ),
-          ],
-          image: DecorationImage(
-            image: logo,
-          ),
-        ),
-      ),
-    );
-  }
 
-  Widget _buildSocialBtnRow() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 15.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          _buildSocialBtn(
-                () => print('Login with Facebook'),
-            const AssetImage(
-              'imagenes/facebook.jpg',
-            ),
-          ),
-          _buildSocialBtn(
-                () => print('Login with Google'),
-            const AssetImage(
-              'imagenes/google.jpg',
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
-  Widget _buildLogueate() {
-    return GestureDetector(
-      onTap: () => {
-        Navigator.pop(context)
-      },
-      child: RichText(
-        text: const TextSpan(
-          children: [
-            TextSpan(
-              text: '¿Ya tienes una cuenta? ',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18.0,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-            TextSpan(
-              text: 'Logueate',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+
 
 
 
@@ -415,19 +319,18 @@ class _PaginaRegistro extends State<PaginaRegistro> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const BackButton(color: Colors.white,),
-        backgroundColor: const Color(0xFF109ADA),
+        leading: const BackButton(color: Color(0xFF109ADA),),
+        backgroundColor: const Color(0xFFEEEEEE),
         centerTitle: true,
-        title: const Text("REGISTRO",
+        title: const Text("Perfil",
           style: TextStyle(
-            color: Colors.white,
+            color: Colors.black,
             fontFamily: 'OpenSans',
             fontSize: 20.0,
             fontWeight: FontWeight.bold,
           ),
         ),
       ),
-      backgroundColor: const Color(0xFF109ADA),
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
         child: GestureDetector(
@@ -445,11 +348,15 @@ class _PaginaRegistro extends State<PaginaRegistro> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(
-                        height: 90,
-                        width: 90,
-                        child: Image.asset('imagenes/registro.png'),
+                      CircleAvatar(
+                        backgroundColor: const Color(0xFF109ADA),
+                        radius: 90.0,
+                        backgroundImage: ExactAssetImage(
+                          'imagenes/Avatar.png',
+                        ),
                       ),
+
+                      Divider(),
                       const SizedBox(height: 9.0),
                       _buildNombre(),
                       const SizedBox(height: 9.0,),
@@ -460,11 +367,8 @@ class _PaginaRegistro extends State<PaginaRegistro> {
                       _buildCorreo(),
                       const SizedBox(height: 9.0,),
                       _buildContrasena(),
-                      const SizedBox(height: 9.0,),
+                      const SizedBox(height: 25.0,),
                       _buildBtnRegistro(),
-                      _buildRegistrarsecon(),
-                      _buildSocialBtnRow(),
-                      _buildLogueate()
                     ],
                   ),
                 ),

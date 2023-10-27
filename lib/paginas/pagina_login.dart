@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:miautolavado/paginas/pagina_principal.dart';
 import 'package:miautolavado/paginas/pagina_recuperarContra.dart';
 import 'package:miautolavado/paginas/pagina_registro.dart';
 
@@ -174,8 +175,6 @@ class _PaginaLogin extends State<PaginaLogin> {
   }
 
   Widget _buildLoginBtn() {
-
-
     return Container(
       padding: const EdgeInsets.all(18.0),
       width: 257,
@@ -192,7 +191,11 @@ class _PaginaLogin extends State<PaginaLogin> {
                 borderRadius: BorderRadius.circular(10)),
             padding: const EdgeInsets.all(10) //content padding inside button
             ),
-        onPressed: () => print('Login Button Pressed'),
+        onPressed: () => {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const PaginaPrincipal())
+          )
+        },
         child: const Text(
           'Iniciar sesion',
           style: TextStyle(

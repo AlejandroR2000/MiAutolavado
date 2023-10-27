@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:miautolavado/paginas/pagina_login.dart';
+import 'package:miautolavado/paginas/pagina_principal.dart';
 import 'package:miautolavado/paginas/pagina_recuperarContra.dart';
 import 'package:miautolavado/paginas/pagina_registro.dart';
 
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         'Home': (BuildContext context) => PaginaLogin(),
         'Registro': (BuildContext context) => PaginaRegistro(),
         'RecuperarContraseña': (BuildContext context) => PaginaRecuperarContra(),
+        'PaginaPrincipal': (BuildContext context) => PaginaPrincipal(),
       },
     );
   }
