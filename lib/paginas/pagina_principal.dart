@@ -88,7 +88,7 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Icon(
-                          Icons.chat,
+                          Icons.list_alt_rounded,
                           color: currentTab == 1 ? Colors.blue : Colors.grey,
                         ),
                         Text(
@@ -121,7 +121,7 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Icon(
-                          Icons.dashboard,
+                          Icons.groups,
                           color: currentTab == 2 ? Colors.blue : Colors.grey,
                         ),
                         Text(
@@ -146,7 +146,7 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Icon(
-                          Icons.chat,
+                          Icons.shopping_bag_rounded,
                           color: currentTab == 3 ? Colors.blue : Colors.grey,
                         ),
                         Text(
