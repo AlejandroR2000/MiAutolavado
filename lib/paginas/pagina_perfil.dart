@@ -308,6 +308,38 @@ class _PaginaPerfilState extends State<PaginaPerfil> {
     );
   }
 
+  Widget _buildBtnCerrarSesion() {
+    return Container(
+      padding: const EdgeInsets.all(8.0),
+      width: 257,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFFCF2E0B),
+            //background color of button
+            side: const BorderSide(width: 1, color: Colors.black),
+            //border width and color
+            elevation: 3,
+            //elevation of button
+            shape: RoundedRectangleBorder(
+              //to set border radius to button
+                borderRadius: BorderRadius.circular(10)),
+            padding: const EdgeInsets.all(10) //content padding inside button
+        ),
+        onPressed: () => print('Login Button Pressed'),
+        child: const Text(
+          'Cerrar sesion',
+          style: TextStyle(
+            color: Color(0xFFFFFFFF),
+            letterSpacing: 1.5,
+            fontSize: 18.0,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'OpenSans',
+          ),
+        ),
+      ),
+    );
+  }
+
 
 
 
@@ -367,8 +399,10 @@ class _PaginaPerfilState extends State<PaginaPerfil> {
                       _buildCorreo(),
                       const SizedBox(height: 9.0,),
                       _buildContrasena(),
-                      const SizedBox(height: 25.0,),
+                      const SizedBox(height: 20.0,),
                       _buildBtnRegistro(),
+                      const SizedBox(height: 1.0,),
+                      _buildBtnCerrarSesion(),
                     ],
                   ),
                 ),

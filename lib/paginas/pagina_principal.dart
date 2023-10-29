@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:miautolavado/paginas/pagina_caja.dart';
 import 'package:miautolavado/paginas/pagina_empleados.dart';
 import 'package:miautolavado/paginas/pagina_historial.dart';
+import 'package:miautolavado/paginas/pagina_perfil.dart';
 import 'package:miautolavado/paginas/pagina_resumen.dart';
 
 class PaginaPrincipal extends StatefulWidget {
@@ -13,15 +14,18 @@ class PaginaPrincipal extends StatefulWidget {
 
 class _PaginaPrincipalState extends State<PaginaPrincipal> {
 
-  int currentTab = 0; // to keep track of active tab index
+  int currentTab = 0;
   final List<Widget> screens = [
     PaginaResumen(),
     PaginaHistorial(),
     PaginaEmpleados(),
     PaginaCaja(),
-  ]; // to store nested tabs
+  ];
+  String _titulo = "Resumen";
   final PageStorageBucket bucket = PageStorageBucket();
-  Widget currentScreen = PaginaResumen(); // Our first view in viewport
+  Widget currentScreen = PaginaResumen();
+
+
 
 
 
@@ -29,6 +33,35 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: const Color(0xFFEEEEEE),
+        centerTitle: true,
+        title: Text(_titulo,
+          style: TextStyle(
+            color: Colors.black,
+            fontFamily: 'OpenSans',
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        actions: <Widget>[
+          IconButton(
+            icon: Image.asset(
+              "imagenes/iconoperfil.png",
+              color: Color(0xFF109ADA),
+              height: 25,
+              width: 25,
+            ),
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const PaginaPerfil()));
+            },
+          )
+        ],
+      ),
       body: PageStorage(
         child: currentScreen,
         bucket: bucket,
@@ -57,6 +90,7 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
                         currentScreen =
                             PaginaResumen(); // if user taps on this dashboard tab will be active
                         currentTab = 0;
+                        _titulo = "Resumen";
                       });
                     },
                     child: Column(
@@ -82,6 +116,7 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
                         currentScreen =
                             PaginaHistorial(); // if user taps on this dashboard tab will be active
                         currentTab = 1;
+                        _titulo = "Historial";
                       });
                     },
                     child: Column(
@@ -115,6 +150,7 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
                         currentScreen =
                            PaginaEmpleados(); // if user taps on this dashboard tab will be active
                         currentTab = 2;
+                        _titulo = "Empleados";
                       });
                     },
                     child: Column(
@@ -140,6 +176,7 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
                         currentScreen =
                             PaginaCaja(); // if user taps on this dashboard tab will be active
                         currentTab = 3;
+                        _titulo = "Caja";
                       });
                     },
                     child: Column(
