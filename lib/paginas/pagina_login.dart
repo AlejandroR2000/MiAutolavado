@@ -367,7 +367,7 @@ class _PaginaLogin extends State<PaginaLogin> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SizedBox(
-                        height: 220,
+                        height: 200,
                         width: 400,
                         child: Image.asset('imagenes/lavado.gif'),
                       ),
