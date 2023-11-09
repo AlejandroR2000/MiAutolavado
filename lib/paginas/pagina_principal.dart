@@ -22,7 +22,6 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
     PaginaCaja(),
   ];
   String _titulo = "Resumen";
-  String _negocio = "Negocio ";
   final PageStorageBucket bucket = PageStorageBucket();
   Widget currentScreen = PaginaResumen();
 
