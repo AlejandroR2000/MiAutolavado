@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:miautolavado/paginas/pagina_agregarnegocio.dart';
 import 'package:miautolavado/paginas/pagina_caja.dart';
 import 'package:miautolavado/paginas/pagina_empleados.dart';
 import 'package:miautolavado/paginas/pagina_historial.dart';
@@ -13,7 +14,6 @@ class PaginaPrincipal extends StatefulWidget {
 }
 
 class _PaginaPrincipalState extends State<PaginaPrincipal> {
-
   int currentTab = 0;
   final List<Widget> screens = [
     PaginaResumen(),
@@ -22,43 +22,100 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
     PaginaCaja(),
   ];
   String _titulo = "Resumen";
+  String _negocio = "Negocio ";
   final PageStorageBucket bucket = PageStorageBucket();
   Widget currentScreen = PaginaResumen();
 
+  String? valueChoose;
+  List listItem = ["Negocio 1", "Negocio 2", "Negocio 3"];
 
-
-
-
+  PreferredSizeWidget buildAppBarBottom() {
+    return PreferredSize(
+      preferredSize:
+          Size.fromHeight(40), // change height depending on the child height
+      child: Container(
+        child: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              // Text("Selecciona un negocio"),
+              DropdownButton(
+                alignment: Alignment.center,
+                hint: Text("Selecciona un negocio"),
+                value: valueChoose,
+                onChanged: (newValue) {
+                  setState(() {
+                    valueChoose = newValue as String;
+                  });
+                },
+                items: listItem.map((valueItem) {
+                  return DropdownMenuItem(
+                    value: valueItem,
+                    child: Text(valueItem),
+                  );
+                }).toList(),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 70,
         automaticallyImplyLeading: false,
         backgroundColor: const Color(0xFFEEEEEE),
         centerTitle: true,
-        title: Text(_titulo,
-          style: TextStyle(
-            color: Colors.black,
-            fontFamily: 'OpenSans',
-            fontSize: 20.0,
-            fontWeight: FontWeight.bold,
+        title: RichText(
+          textAlign: TextAlign.center,
+          text: TextSpan(
+            text: _titulo,
+            style: TextStyle(
+              color: Colors.black,
+              fontFamily: 'OpenSans',
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+            ),
+            /*
+            children: <TextSpan>[
+                TextSpan(
+                  text: '\n' + _negocio,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+              ]*/
           ),
+        ),
+        bottom: buildAppBarBottom(),
+        leading: IconButton(
+          iconSize: 30,
+          color: Color(0xFF109ADA),
+          onPressed: (){
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const PaginaAgregarNegocio()));
+          },
+          icon: Icon(Icons.add_business_rounded),
         ),
         actions: <Widget>[
           IconButton(
-            icon: Image.asset(
-              "imagenes/iconoperfil.png",
-              color: Color(0xFF109ADA),
-              height: 25,
-              width: 25,
-            ),
-            onPressed: () {
+            iconSize: 30,
+            color: Color(0xFF109ADA),
+            onPressed: (){
               Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => const PaginaPerfil()));
             },
+            icon: Icon(Icons.manage_accounts_rounded),
           )
         ],
       ),
@@ -67,9 +124,8 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
         bucket: bucket,
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () {
-        },
+        child: Icon(Icons.settings),
+        onPressed: () {},
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
@@ -148,7 +204,7 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
                     onPressed: () {
                       setState(() {
                         currentScreen =
-                           PaginaEmpleados(); // if user taps on this dashboard tab will be active
+                            PaginaEmpleados(); // if user taps on this dashboard tab will be active
                         currentTab = 2;
                         _titulo = "Empleados";
                       });
@@ -197,7 +253,6 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
                   )
                 ],
               )
-
             ],
           ),
         ),

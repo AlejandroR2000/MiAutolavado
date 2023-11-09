@@ -1,10 +1,10 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:miautolavado/paginas/pagina_principal.dart';
 import 'package:miautolavado/paginas/pagina_recuperarContra.dart';
 import 'package:miautolavado/paginas/pagina_registro.dart';
-
-
+import 'package:miautolavado/paginas/widgets/mensajes.dart';
 
 class PaginaLogin extends StatefulWidget {
   const PaginaLogin({super.key});
@@ -13,6 +13,8 @@ class PaginaLogin extends StatefulWidget {
 }
 
 class _PaginaLogin extends State<PaginaLogin> {
+  TextEditingController email = TextEditingController();
+  TextEditingController contrasena = TextEditingController();
   bool _rememberMe = false;
 
   Widget _buildEmailTF() {
@@ -43,7 +45,8 @@ class _PaginaLogin extends State<PaginaLogin> {
             ],
           ),
           height: 45.0,
-          child: const TextField(
+          child: TextFormField(
+            controller: email,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
               color: Colors.black,
@@ -96,7 +99,8 @@ class _PaginaLogin extends State<PaginaLogin> {
             ],
           ),
           height: 45.0,
-          child: const TextField(
+          child: TextField(
+            controller: contrasena,
             keyboardType: TextInputType.emailAddress,
             obscureText: true,
             style: TextStyle(
@@ -127,9 +131,10 @@ class _PaginaLogin extends State<PaginaLogin> {
       alignment: Alignment.centerRight,
       child: TextButton(
         onPressed: () => {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const PaginaRecuperarContra())
-          )
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const PaginaRecuperarContra()))
         },
         child: const Text(
           '¿Olvidaste tu contraseña?',
@@ -174,7 +179,18 @@ class _PaginaLogin extends State<PaginaLogin> {
     );
   }
 
+  void showSnackBar(BuildContext context) {
+    final snackBar = SnackBar(
+      content: Text('Hi, Flutter developers'),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
   Widget _buildLoginBtn() {
+    String usuario = 'juan@hotmail.com';
+    String contra = 'jose';
+
+
     return Container(
       padding: const EdgeInsets.all(18.0),
       width: 257,
@@ -192,9 +208,25 @@ class _PaginaLogin extends State<PaginaLogin> {
             padding: const EdgeInsets.all(10) //content padding inside button
             ),
         onPressed: () => {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const PaginaPrincipal())
-          )
+          if (email.text.isEmpty || contrasena.text.isEmpty)
+            {
+              MessageWidget.error(
+                  context, "Alguno de los campos estan vacios", 3)
+            }
+          else if (EmailValidator.validate(email.text) == false)
+            {MessageWidget.error(context, "Correo invalido", 3)}
+          else {
+              if (email.text == usuario){
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const PaginaPrincipal()))
+
+              }else {
+                MessageWidget.error(context, "Correo o contraseña incorrecta", 3)
+              }
+
+            },
         },
         child: const Text(
           'Iniciar sesion',
@@ -235,7 +267,9 @@ class _PaginaLogin extends State<PaginaLogin> {
 
   Widget _buildSocialBtn(Function onTap, AssetImage logo) {
     return GestureDetector(
-      onTap: (){ onTap();},
+      onTap: () {
+        onTap();
+      },
       child: Container(
         height: 60.0,
         width: 60.0,
@@ -264,7 +298,7 @@ class _PaginaLogin extends State<PaginaLogin> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           _buildSocialBtn(
-             () => print('Login with Facebook'),
+            () => {},
             const AssetImage(
               'imagenes/facebook.jpg',
             ),
@@ -283,9 +317,8 @@ class _PaginaLogin extends State<PaginaLogin> {
   Widget _buildSignupBtn() {
     return GestureDetector(
       onTap: () => {
-        Navigator.push(context, 
-          MaterialPageRoute(builder: (context) => const PaginaRegistro())
-        )
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const PaginaRegistro()))
       },
       child: RichText(
         text: const TextSpan(
