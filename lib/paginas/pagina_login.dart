@@ -380,7 +380,7 @@ class _PaginaLogin extends State<PaginaLogin> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(height: 20.0),
+                      const SizedBox(height: 15.0),
                       _buildEmailTF(),
                       const SizedBox(
                         height: 20.0,
