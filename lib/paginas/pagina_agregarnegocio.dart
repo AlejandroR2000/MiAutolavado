@@ -242,15 +242,14 @@ class _PaginaAgregarNegocioState extends State<PaginaAgregarNegocio> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      CircleAvatar(
-                        backgroundColor: const Color(0xFF109ADA),
+                      const CircleAvatar(
+                        backgroundColor: Color(0xFF109ADA),
                         radius: 90.0,
                         backgroundImage: ExactAssetImage(
                           'imagenes/AvatarNegocio.png',
                         ),
                       ),
-
-                      Divider(),
+                      const Divider(),
                       const SizedBox(height: 9.0),
                       _buildNombreNegocio(),
                       const SizedBox(height: 9.0,),

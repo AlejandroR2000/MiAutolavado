@@ -16,14 +16,14 @@ class PaginaPrincipal extends StatefulWidget {
 class _PaginaPrincipalState extends State<PaginaPrincipal> {
   int currentTab = 0;
   final List<Widget> screens = [
-    PaginaResumen(),
-    PaginaHistorial(),
-    PaginaEmpleados(),
-    PaginaCaja(),
+    const PaginaResumen(),
+    const PaginaHistorial(),
+    const PaginaEmpleados(),
+    const PaginaCaja(),
   ];
   String _titulo = "Resumen";
   final PageStorageBucket bucket = PageStorageBucket();
-  Widget currentScreen = PaginaResumen();
+  Widget currentScreen = const PaginaResumen();
 
   String? valueChoose;
   List listItem = ["Negocio 1", "Negocio 2", "Negocio 3"];
@@ -31,32 +31,30 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
   PreferredSizeWidget buildAppBarBottom() {
     return PreferredSize(
       preferredSize:
-          Size.fromHeight(40), // change height depending on the child height
-      child: Container(
-        child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              // Text("Selecciona un negocio"),
-              DropdownButton(
-                alignment: Alignment.center,
-                hint: Text("Selecciona un negocio"),
-                value: valueChoose,
-                onChanged: (newValue) {
-                  setState(() {
-                    valueChoose = newValue as String;
-                  });
-                },
-                items: listItem.map((valueItem) {
-                  return DropdownMenuItem(
-                    value: valueItem,
-                    child: Text(valueItem),
-                  );
-                }).toList(),
-              ),
-            ],
-          ),
+          const Size.fromHeight(40), // change height depending on the child height
+      child: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            // Text("Selecciona un negocio"),
+            DropdownButton(
+              alignment: Alignment.center,
+              hint: const Text("Selecciona un negocio"),
+              value: valueChoose,
+              onChanged: (newValue) {
+                setState(() {
+                  valueChoose = newValue as String;
+                });
+              },
+              items: listItem.map((valueItem) {
+                return DropdownMenuItem(
+                  value: valueItem,
+                  child: Text(valueItem),
+                );
+              }).toList(),
+            ),
+          ],
         ),
       ),
     );
@@ -74,7 +72,7 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
           textAlign: TextAlign.center,
           text: TextSpan(
             text: _titulo,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.black,
               fontFamily: 'OpenSans',
               fontSize: 20.0,
@@ -95,40 +93,40 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
         bottom: buildAppBarBottom(),
         leading: IconButton(
           iconSize: 30,
-          color: Color(0xFF109ADA),
+          color: const Color(0xFF109ADA),
           onPressed: (){
             Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) => const PaginaAgregarNegocio()));
           },
-          icon: Icon(Icons.add_business_rounded),
+          icon: const Icon(Icons.add_business_rounded),
         ),
         actions: <Widget>[
           IconButton(
             iconSize: 30,
-            color: Color(0xFF109ADA),
+            color: const Color(0xFF109ADA),
             onPressed: (){
               Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => const PaginaPerfil()));
             },
-            icon: Icon(Icons.manage_accounts_rounded),
+            icon: const Icon(Icons.manage_accounts_rounded),
           )
         ],
       ),
       body: PageStorage(
-        child: currentScreen,
         bucket: bucket,
+        child: currentScreen,
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.settings),
+        child: const Icon(Icons.settings),
         onPressed: () {},
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
+        shape: const CircularNotchedRectangle(),
         notchMargin: 10,
         child: Container(
           height: 60,
@@ -143,7 +141,7 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
                     onPressed: () {
                       setState(() {
                         currentScreen =
-                            PaginaResumen(); // if user taps on this dashboard tab will be active
+                            const PaginaResumen(); // if user taps on this dashboard tab will be active
                         currentTab = 0;
                         _titulo = "Resumen";
                       });
@@ -169,7 +167,7 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
                     onPressed: () {
                       setState(() {
                         currentScreen =
-                            PaginaHistorial(); // if user taps on this dashboard tab will be active
+                            const PaginaHistorial(); // if user taps on this dashboard tab will be active
                         currentTab = 1;
                         _titulo = "Historial";
                       });
@@ -203,7 +201,7 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
                     onPressed: () {
                       setState(() {
                         currentScreen =
-                            PaginaEmpleados(); // if user taps on this dashboard tab will be active
+                            const PaginaEmpleados(); // if user taps on this dashboard tab will be active
                         currentTab = 2;
                         _titulo = "Empleados";
                       });
@@ -229,7 +227,7 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
                     onPressed: () {
                       setState(() {
                         currentScreen =
-                            PaginaCaja(); // if user taps on this dashboard tab will be active
+                            const PaginaCaja(); // if user taps on this dashboard tab will be active
                         currentTab = 3;
                         _titulo = "Caja";
                       });
