@@ -188,7 +188,7 @@ class _PaginaLogin extends State<PaginaLogin> {
 
   Widget _buildLoginBtn() {
     String usuario = 'juan@hotmail.com';
-    String contra = 'jose';
+
 
 
     return Container(
