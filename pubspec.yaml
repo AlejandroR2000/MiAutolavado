@@ -37,6 +37,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   another_flushbar: ^1.12.30
   email_validator: '^2.1.16'
+  firebase_core: ^2.23.0
+  firebase_auth: ^4.14.1
+  fluttertoast: ^8.2.4
 
 dev_dependencies:
   flutter_test:

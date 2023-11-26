@@ -294,7 +294,10 @@ class _PaginaRegistro extends State<PaginaRegistro> {
                 borderRadius: BorderRadius.circular(10)),
             padding: const EdgeInsets.all(10) //content padding inside button
         ),
-        onPressed: () => print('Login Button Pressed'),
+        onPressed: () => {
+
+
+        },
         child: const Text(
           'Registrarse',
           style: TextStyle(

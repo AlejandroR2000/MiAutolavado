@@ -1,5 +1,44 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+
+void mensajeError({required String message}){
+  Fluttertoast.showToast(
+      msg: message,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.TOP,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.red,
+      textColor: Colors.white,
+      fontSize: 16.0
+  );
+}
+
+void mensajeInfo({required String message}){
+  Fluttertoast.showToast(
+      msg: message,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.TOP,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.amber,
+      textColor: Colors.white,
+      fontSize: 16.0
+  );
+}
+
+void mensajeCorrecto({required String message}){
+  Fluttertoast.showToast(
+      msg: message,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.TOP,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.green,
+      textColor: Colors.white,
+      fontSize: 16.0
+  );
+}
+
 
 class MessageWidget  {
 
@@ -45,5 +84,4 @@ class MessageWidget  {
       duration: Duration(seconds: seconds),
     )..show(context);
   }
-
 }

@@ -1,10 +1,10 @@
-import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:miautolavado/paginas/pagina_principal.dart';
 import 'package:miautolavado/paginas/pagina_recuperarContra.dart';
 import 'package:miautolavado/paginas/pagina_registro.dart';
-import 'package:miautolavado/paginas/widgets/mensajes.dart';
+import 'package:miautolavado/widgets/mensajes.dart';
+import '../firebase_auth/firebase_auth_services.dart';
 
 class PaginaLogin extends StatefulWidget {
   const PaginaLogin({super.key});
@@ -13,9 +13,17 @@ class PaginaLogin extends StatefulWidget {
 }
 
 class _PaginaLogin extends State<PaginaLogin> {
-  TextEditingController email = TextEditingController();
+  bool logueado = false;
+  final FirebaseAuthService _auth = FirebaseAuthService();
+  TextEditingController correo = TextEditingController();
   TextEditingController contrasena = TextEditingController();
   bool _rememberMe = false;
+
+  void dispose() {
+    correo.dispose();
+    contrasena.dispose();
+    super.dispose();
+  }
 
   Widget _buildEmailTF() {
     return Column(
@@ -46,7 +54,7 @@ class _PaginaLogin extends State<PaginaLogin> {
           ),
           height: 45.0,
           child: TextFormField(
-            controller: email,
+            controller: correo,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
               color: Colors.black,
@@ -187,10 +195,6 @@ class _PaginaLogin extends State<PaginaLogin> {
   }
 
   Widget _buildLoginBtn() {
-    String usuario = 'juan@hotmail.com';
-
-
-
     return Container(
       padding: const EdgeInsets.all(18.0),
       width: 257,
@@ -208,25 +212,10 @@ class _PaginaLogin extends State<PaginaLogin> {
             padding: const EdgeInsets.all(10) //content padding inside button
             ),
         onPressed: () => {
-          if (email.text.isEmpty || contrasena.text.isEmpty)
-            {
-              MessageWidget.error(
-                  context, "Alguno de los campos estan vacios", 3)
-            }
-          else if (EmailValidator.validate(email.text) == false)
-            {MessageWidget.error(context, "Correo invalido", 3)}
-          else {
-              if (email.text == usuario){
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const PaginaPrincipal()))
-
-              }else {
-                MessageWidget.error(context, "Correo o contraseña incorrecta", 3)
-              }
-
-            },
+          if (correo.text.isEmpty || contrasena.text.isEmpty)
+            {mensajeError(message: 'Algun campo esta vacio')}
+          else
+            {_signIn()}
         },
         child: const Text(
           'Iniciar sesion',
@@ -401,5 +390,27 @@ class _PaginaLogin extends State<PaginaLogin> {
         ),
       ),
     );
+  }
+
+  void _signIn() async {
+    setState(() {
+      logueado = true;
+    });
+
+    String email = correo.text;
+    String password = contrasena.text;
+
+    User? user = await _auth.signInWithEmailAndPassword(email, password);
+
+    setState(() {
+      logueado = false;
+    });
+
+    if (user != null) {
+      mensajeCorrecto(message: 'El usuario inició sesión correctamente');
+      Navigator.pushNamed(context, "PaginaPrincipal");
+    } else {
+      // showToast(message: 'Ocurrio un error');
+    }
   }
 }
