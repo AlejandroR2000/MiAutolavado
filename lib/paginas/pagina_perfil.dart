@@ -1,5 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import '../widgets/mensajes.dart';
 
 class PaginaPerfil extends StatefulWidget {
   const PaginaPerfil({super.key});
@@ -9,7 +12,6 @@ class PaginaPerfil extends StatefulWidget {
 }
 
 class _PaginaPerfilState extends State<PaginaPerfil> {
-
   Widget _buildNombre() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -289,10 +291,10 @@ class _PaginaPerfilState extends State<PaginaPerfil> {
             elevation: 3,
             //elevation of button
             shape: RoundedRectangleBorder(
-              //to set border radius to button
+                //to set border radius to button
                 borderRadius: BorderRadius.circular(10)),
             padding: const EdgeInsets.all(10) //content padding inside button
-        ),
+            ),
         onPressed: () => print('Login Button Pressed'),
         child: const Text(
           'Guardar datos',
@@ -321,11 +323,15 @@ class _PaginaPerfilState extends State<PaginaPerfil> {
             elevation: 3,
             //elevation of button
             shape: RoundedRectangleBorder(
-              //to set border radius to button
+                //to set border radius to button
                 borderRadius: BorderRadius.circular(10)),
             padding: const EdgeInsets.all(10) //content padding inside button
-        ),
-        onPressed: () => print('Login Button Pressed'),
+            ),
+        onPressed: () => {
+          FirebaseAuth.instance.signOut(),
+          Navigator.pushNamed(context, "Home"),
+          mensajeCorrecto(message: "Cerraste sesion correctamente"),
+        },
         child: const Text(
           'Cerrar sesion',
           style: TextStyle(
@@ -340,21 +346,17 @@ class _PaginaPerfilState extends State<PaginaPerfil> {
     );
   }
 
-
-
-
-
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const BackButton(color: Color(0xFF109ADA),),
+        leading: const BackButton(
+          color: Color(0xFF109ADA),
+        ),
         backgroundColor: const Color(0xFFEEEEEE),
         centerTitle: true,
-        title: const Text("Perfil",
+        title: const Text(
+          "Perfil",
           style: TextStyle(
             color: Colors.black,
             fontFamily: 'OpenSans',
@@ -387,21 +389,32 @@ class _PaginaPerfilState extends State<PaginaPerfil> {
                           'imagenes/Avatar.png',
                         ),
                       ),
-
                       Divider(),
                       const SizedBox(height: 9.0),
                       _buildNombre(),
-                      const SizedBox(height: 9.0,),
+                      const SizedBox(
+                        height: 9.0,
+                      ),
                       _buildApellido(),
-                      const SizedBox(height: 9.0,),
+                      const SizedBox(
+                        height: 9.0,
+                      ),
                       _buildTelefono(),
-                      const SizedBox(height: 9.0,),
+                      const SizedBox(
+                        height: 9.0,
+                      ),
                       _buildCorreo(),
-                      const SizedBox(height: 9.0,),
+                      const SizedBox(
+                        height: 9.0,
+                      ),
                       _buildContrasena(),
-                      const SizedBox(height: 20.0,),
+                      const SizedBox(
+                        height: 20.0,
+                      ),
                       _buildBtnRegistro(),
-                      const SizedBox(height: 1.0,),
+                      const SizedBox(
+                        height: 1.0,
+                      ),
                       _buildBtnCerrarSesion(),
                     ],
                   ),
