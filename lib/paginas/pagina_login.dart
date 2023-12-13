@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:miautolavado/paginas/pagina_principal.dart';
 import 'package:miautolavado/paginas/pagina_recuperarContra.dart';
 import 'package:miautolavado/paginas/pagina_registro.dart';
 import 'package:miautolavado/widgets/mensajes.dart';
-import '../firebase_auth/firebase_auth_services.dart';
 
 class PaginaLogin extends StatefulWidget {
   const PaginaLogin({super.key});
@@ -14,7 +14,6 @@ class PaginaLogin extends StatefulWidget {
 
 class _PaginaLogin extends State<PaginaLogin> {
   bool logueado = false;
-  final FirebaseAuthService _auth = FirebaseAuthService();
   TextEditingController correo = TextEditingController();
   TextEditingController contrasena = TextEditingController();
   bool _rememberMe = false;
@@ -212,10 +211,23 @@ class _PaginaLogin extends State<PaginaLogin> {
             padding: const EdgeInsets.all(10) //content padding inside button
             ),
         onPressed: () => {
-          if (correo.text.isEmpty || contrasena.text.isEmpty)
-            {mensajeError(message: 'Algun campo esta vacio')}
-          else
-            {_signIn()}
+          FirebaseAuth.instance
+              .signInWithEmailAndPassword(
+                  email: correo.text, password: contrasena.text)
+              .then((user) {
+            mensajeCorrecto(message: 'El usuario inició sesión correctamente');
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => PaginaPrincipal()));
+          }).catchError((e) {
+            if (e.code == 'invalid-credential' || e.code == 'wrong-password') {
+              mensajeError(
+                  message: 'Correo electrónico o contraseña incorrecta.');
+            } else if (e.code == 'invalid-email') {
+              mensajeError(message: 'El formato de correo es invalido.');
+            } else {
+              mensajeError(message: 'Ocurrió un error: ${e.code}');
+            }
+          }),
         },
         child: const Text(
           'Iniciar sesion',
@@ -390,27 +402,5 @@ class _PaginaLogin extends State<PaginaLogin> {
         ),
       ),
     );
-  }
-
-  void _signIn() async {
-    setState(() {
-      logueado = true;
-    });
-
-    String email = correo.text;
-    String password = contrasena.text;
-
-    User? user = await _auth.signInWithEmailAndPassword(email, password);
-
-    setState(() {
-      logueado = false;
-    });
-
-    if (user != null) {
-      mensajeCorrecto(message: 'El usuario inició sesión correctamente');
-      Navigator.pushNamed(context, "PaginaPrincipal");
-    } else {
-      // showToast(message: 'Ocurrio un error');
-    }
   }
 }

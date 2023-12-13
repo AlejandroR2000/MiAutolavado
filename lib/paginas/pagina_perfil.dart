@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,6 +13,17 @@ class PaginaPerfil extends StatefulWidget {
 }
 
 class _PaginaPerfilState extends State<PaginaPerfil> {
+  TextEditingController nombre = TextEditingController(text: "");
+  TextEditingController apellido = TextEditingController(text: "");
+  TextEditingController telefono = TextEditingController(text: "");
+  TextEditingController correo = TextEditingController(text: "");
+
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getModules();
+  }
+
   Widget _buildNombre() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,7 +52,8 @@ class _PaginaPerfilState extends State<PaginaPerfil> {
             ],
           ),
           height: 45.0,
-          child: const TextField(
+          child: TextField(
+            controller: nombre,
             keyboardType: TextInputType.name,
             style: TextStyle(
               color: Colors.black,
@@ -93,7 +106,8 @@ class _PaginaPerfilState extends State<PaginaPerfil> {
             ],
           ),
           height: 45.0,
-          child: const TextField(
+          child: TextField(
+            controller: apellido,
             keyboardType: TextInputType.name,
             style: TextStyle(
               color: Colors.black,
@@ -146,7 +160,8 @@ class _PaginaPerfilState extends State<PaginaPerfil> {
             ],
           ),
           height: 45.0,
-          child: const TextField(
+          child: TextField(
+            controller: correo,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
               color: Colors.black,
@@ -199,7 +214,8 @@ class _PaginaPerfilState extends State<PaginaPerfil> {
             ],
           ),
           height: 45.0,
-          child: const TextField(
+          child: TextField(
+            controller: telefono,
             keyboardType: TextInputType.phone,
             style: TextStyle(
               color: Colors.black,
@@ -425,5 +441,26 @@ class _PaginaPerfilState extends State<PaginaPerfil> {
         ),
       ),
     );
+  }
+
+  getModules() async {
+    {
+      final firebaseUser = await FirebaseAuth.instance.currentUser!;
+      if (firebaseUser != null)
+        await FirebaseFirestore.instance
+            .collection('dueños')
+            .doc(firebaseUser.uid)
+            .get()
+            .then((ds) {
+          nombre.text = ds.data()!['nombre'];
+          apellido.text = ds.data()!['apellido'];
+          telefono.text = ds.data()!['telefono'];
+          correo.text = ds.data()!['email'];
+        }).catchError((e) {
+          print(e);
+        });
+
+      /// now _module1Controller.text contains the text from database....
+    }
   }
 }

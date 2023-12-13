@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../firebase_auth/duenos_users.dart';
+import '../widgets/mensajes.dart';
 
 class PaginaRegistro extends StatefulWidget {
   const PaginaRegistro({super.key});
@@ -10,6 +13,20 @@ class PaginaRegistro extends StatefulWidget {
 }
 
 class _PaginaRegistro extends State<PaginaRegistro> {
+  TextEditingController correo = TextEditingController();
+  TextEditingController contrasena = TextEditingController();
+  TextEditingController nombre = TextEditingController();
+  TextEditingController apellido = TextEditingController();
+  TextEditingController telefono = TextEditingController();
+
+  void dispose() {
+    correo.dispose();
+    contrasena.dispose();
+    nombre.dispose();
+    apellido.dispose();
+    telefono.dispose();
+    super.dispose();
+  }
 
   Widget _buildNombre() {
     return Column(
@@ -39,7 +56,8 @@ class _PaginaRegistro extends State<PaginaRegistro> {
             ],
           ),
           height: 45.0,
-          child: const TextField(
+          child: TextField(
+            controller: nombre,
             keyboardType: TextInputType.name,
             style: TextStyle(
               color: Colors.black,
@@ -92,7 +110,8 @@ class _PaginaRegistro extends State<PaginaRegistro> {
             ],
           ),
           height: 45.0,
-          child: const TextField(
+          child: TextField(
+            controller: apellido,
             keyboardType: TextInputType.name,
             style: TextStyle(
               color: Colors.black,
@@ -145,7 +164,8 @@ class _PaginaRegistro extends State<PaginaRegistro> {
             ],
           ),
           height: 45.0,
-          child: const TextField(
+          child: TextField(
+            controller: correo,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
               color: Colors.black,
@@ -198,7 +218,8 @@ class _PaginaRegistro extends State<PaginaRegistro> {
             ],
           ),
           height: 45.0,
-          child: const TextField(
+          child: TextField(
+            controller: telefono,
             keyboardType: TextInputType.phone,
             style: TextStyle(
               color: Colors.black,
@@ -251,7 +272,8 @@ class _PaginaRegistro extends State<PaginaRegistro> {
             ],
           ),
           height: 45.0,
-          child: const TextField(
+          child: TextField(
+            controller: contrasena,
             keyboardType: TextInputType.emailAddress,
             obscureText: true,
             style: TextStyle(
@@ -290,13 +312,26 @@ class _PaginaRegistro extends State<PaginaRegistro> {
             elevation: 3,
             //elevation of button
             shape: RoundedRectangleBorder(
-              //to set border radius to button
+                //to set border radius to button
                 borderRadius: BorderRadius.circular(10)),
             padding: const EdgeInsets.all(10) //content padding inside button
-        ),
+            ),
         onPressed: () => {
-
-
+          FirebaseAuth.instance
+              .createUserWithEmailAndPassword(
+                  email: correo.text, password: contrasena.text)
+              .then((signedInUser) {
+            mensajeCorrecto(message: 'El usuario se registro correctamente');
+            UserManagement().storeNewUser(nombre.text, apellido.text, telefono.text, signedInUser.user, context);
+          }).catchError((e) {
+            if (e.code == 'email-already-in-use') {
+              mensajeError(
+                  message:
+                      'La dirección de correo electrónico ya está en uso.');
+            } else {
+              mensajeError(message: 'Ocurrió un error: ${e.code}');
+            }
+          }),
         },
         child: const Text(
           'Registrarse',
@@ -337,7 +372,9 @@ class _PaginaRegistro extends State<PaginaRegistro> {
 
   Widget _buildSocialBtn(Function onTap, AssetImage logo) {
     return GestureDetector(
-      onTap: (){ onTap();},
+      onTap: () {
+        onTap();
+      },
       child: Container(
         height: 60.0,
         width: 60.0,
@@ -366,13 +403,13 @@ class _PaginaRegistro extends State<PaginaRegistro> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           _buildSocialBtn(
-                () => print('Login with Facebook'),
+            () => print('Login with Facebook'),
             const AssetImage(
               'imagenes/facebook.jpg',
             ),
           ),
           _buildSocialBtn(
-                () => print('Login with Google'),
+            () => print('Login with Google'),
             const AssetImage(
               'imagenes/google.jpg',
             ),
@@ -384,9 +421,7 @@ class _PaginaRegistro extends State<PaginaRegistro> {
 
   Widget _buildLogueate() {
     return GestureDetector(
-      onTap: () => {
-        Navigator.pop(context)
-      },
+      onTap: () => {Navigator.pop(context)},
       child: RichText(
         text: const TextSpan(
           children: [
@@ -412,16 +447,17 @@ class _PaginaRegistro extends State<PaginaRegistro> {
     );
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const BackButton(color: Colors.white,),
+        leading: const BackButton(
+          color: Colors.white,
+        ),
         backgroundColor: const Color(0xFF109ADA),
         centerTitle: true,
-        title: const Text("REGISTRO",
+        title: const Text(
+          "REGISTRO",
           style: TextStyle(
             color: Colors.white,
             fontFamily: 'OpenSans',
@@ -455,15 +491,25 @@ class _PaginaRegistro extends State<PaginaRegistro> {
                       ),
                       const SizedBox(height: 9.0),
                       _buildNombre(),
-                      const SizedBox(height: 9.0,),
+                      const SizedBox(
+                        height: 9.0,
+                      ),
                       _buildApellido(),
-                      const SizedBox(height: 9.0,),
+                      const SizedBox(
+                        height: 9.0,
+                      ),
                       _buildTelefono(),
-                      const SizedBox(height: 9.0,),
+                      const SizedBox(
+                        height: 9.0,
+                      ),
                       _buildCorreo(),
-                      const SizedBox(height: 9.0,),
+                      const SizedBox(
+                        height: 9.0,
+                      ),
                       _buildContrasena(),
-                      const SizedBox(height: 9.0,),
+                      const SizedBox(
+                        height: 9.0,
+                      ),
                       _buildBtnRegistro(),
                       _buildRegistrarsecon(),
                       _buildSocialBtnRow(),
