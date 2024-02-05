@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+
 import '../widgets/mensajes.dart';
 
 class PaginaPerfil extends StatefulWidget {
@@ -345,7 +346,9 @@ class _PaginaPerfilState extends State<PaginaPerfil> {
             ),
         onPressed: () => {
           FirebaseAuth.instance.signOut(),
-          Navigator.pushNamed(context, "Home"),
+          //Navigator.pushNamed(context, "Home"),
+        //Navigator.pushAndRemoveUntil<void>(context, MaterialPageRoute<void>(builder: (BuildContext context) => const PaginaLogin()), ModalRoute.withName('/'),),
+        Navigator.of(context).pushNamedAndRemoveUntil('Login', (Route<dynamic> route) => false),
           mensajeCorrecto(message: "Cerraste sesion correctamente"),
         },
         child: const Text(

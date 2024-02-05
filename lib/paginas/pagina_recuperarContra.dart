@@ -1,5 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import '../widgets/mensajes.dart';
 
 class PaginaRecuperarContra extends StatefulWidget {
   const PaginaRecuperarContra({super.key});
@@ -9,6 +12,7 @@ class PaginaRecuperarContra extends StatefulWidget {
 }
 
 class _PaginaRecuperarContraState extends State<PaginaRecuperarContra> {
+  TextEditingController correo = TextEditingController();
 
   Widget _buildCorreo() {
     return Column(
@@ -40,7 +44,8 @@ class _PaginaRecuperarContraState extends State<PaginaRecuperarContra> {
             ],
           ),
           height: 45.0,
-          child: const TextField(
+          child: TextField(
+            controller: correo,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
               color: Colors.black,
@@ -81,7 +86,23 @@ class _PaginaRecuperarContraState extends State<PaginaRecuperarContra> {
                 borderRadius: BorderRadius.circular(10)),
             padding: const EdgeInsets.all(12) //content padding inside button
         ),
-        onPressed: () => print('Login Button Pressed'),
+        onPressed: () => {
+    FirebaseAuth.instance
+        .sendPasswordResetEmail(email: correo.text.toString()).then((value) {
+      Navigator.of(context).pushNamedAndRemoveUntil('Login', (Route<dynamic> route) => false);
+      mensajeCorrecto(message: 'Se envio un link a tu correo para restablecer tu contraseña');
+    }).catchError((e) {
+      if (e.code == 'invalid-email') {
+        mensajeError(message: 'El formato de correo es invalido.');
+      }
+    }),
+
+
+
+
+
+
+        },
         child: const Text(
           'Restablecer contraseña',
           style: TextStyle(

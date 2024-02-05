@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:miautolavado/paginas/pagina_principal.dart';
 import 'package:miautolavado/paginas/pagina_recuperarContra.dart';
 import 'package:miautolavado/paginas/pagina_registro.dart';
 import 'package:miautolavado/widgets/mensajes.dart';
@@ -13,6 +12,8 @@ class PaginaLogin extends StatefulWidget {
 }
 
 class _PaginaLogin extends State<PaginaLogin> {
+
+
   bool logueado = false;
   TextEditingController correo = TextEditingController();
   TextEditingController contrasena = TextEditingController();
@@ -216,12 +217,11 @@ class _PaginaLogin extends State<PaginaLogin> {
                   email: correo.text, password: contrasena.text)
               .then((user) {
             mensajeCorrecto(message: 'El usuario inició sesión correctamente');
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => PaginaPrincipal()));
+            //Navigator.push(context, MaterialPageRoute(builder: (context) => PaginaPrincipal()));
+            Navigator.of(context).pushNamedAndRemoveUntil('PaginaPrincipal', (Route<dynamic> route) => false);
           }).catchError((e) {
             if (e.code == 'invalid-credential' || e.code == 'wrong-password') {
-              mensajeError(
-                  message: 'Correo electrónico o contraseña incorrecta.');
+              mensajeError(message: 'Correo electrónico o contraseña incorrecta.');
             } else if (e.code == 'invalid-email') {
               mensajeError(message: 'El formato de correo es invalido.');
             } else {

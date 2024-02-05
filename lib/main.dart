@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:miautolavado/paginas/pagina_bienvenida.dart';
 import 'package:miautolavado/paginas/pagina_login.dart';
 import 'package:miautolavado/paginas/pagina_principal.dart';
 import 'package:miautolavado/paginas/pagina_recuperarContra.dart';
@@ -30,9 +31,10 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      initialRoute: 'Home',
+      initialRoute: 'Bienvenida',
       routes: <String, WidgetBuilder>{
-        'Home': (BuildContext context) => PaginaLogin(),
+        'Bienvenida': (BuildContext context) => PaginaBienvenida(),
+        'Login': (BuildContext context) => PaginaLogin(),
         'Registro': (BuildContext context) => PaginaRegistro(),
         'RecuperarContraseña': (BuildContext context) => PaginaRecuperarContra(),
         'PaginaPrincipal': (BuildContext context) => PaginaPrincipal(),
