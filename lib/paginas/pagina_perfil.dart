@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-
 import '../widgets/mensajes.dart';
 
 class PaginaPerfil extends StatefulWidget {
@@ -162,6 +161,7 @@ class _PaginaPerfilState extends State<PaginaPerfil> {
           ),
           height: 45.0,
           child: TextField(
+            readOnly: true,
             controller: correo,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
@@ -271,6 +271,7 @@ class _PaginaPerfilState extends State<PaginaPerfil> {
           height: 45.0,
           child: const TextField(
             keyboardType: TextInputType.emailAddress,
+            readOnly: false,
             obscureText: true,
             style: TextStyle(
               color: Colors.black,
@@ -295,7 +296,7 @@ class _PaginaPerfilState extends State<PaginaPerfil> {
     );
   }
 
-  Widget _buildBtnRegistro() {
+  Widget _buildBtnguardar() {
     return Container(
       padding: const EdgeInsets.all(8.0),
       width: 257,
@@ -312,7 +313,17 @@ class _PaginaPerfilState extends State<PaginaPerfil> {
                 borderRadius: BorderRadius.circular(10)),
             padding: const EdgeInsets.all(10) //content padding inside button
             ),
-        onPressed: () => print('Login Button Pressed'),
+        onPressed: () => {
+
+        FirebaseFirestore.instance
+            .collection('dueños')
+            .doc(FirebaseAuth.instance.currentUser!.uid)
+            .update({'nombre': nombre.text,'apellido': apellido.text,'telefono': telefono.text,})
+            .then((value) => Navigator.of(context).pushNamedAndRemoveUntil('PaginaPrincipal', (Route<dynamic> route) => false),)
+            .catchError((e) {
+        print(e);
+        }),
+        },
         child: const Text(
           'Guardar datos',
           style: TextStyle(
@@ -347,8 +358,9 @@ class _PaginaPerfilState extends State<PaginaPerfil> {
         onPressed: () => {
           FirebaseAuth.instance.signOut(),
           //Navigator.pushNamed(context, "Home"),
-        //Navigator.pushAndRemoveUntil<void>(context, MaterialPageRoute<void>(builder: (BuildContext context) => const PaginaLogin()), ModalRoute.withName('/'),),
-        Navigator.of(context).pushNamedAndRemoveUntil('Login', (Route<dynamic> route) => false),
+          //Navigator.pushAndRemoveUntil<void>(context, MaterialPageRoute<void>(builder: (BuildContext context) => const PaginaLogin()), ModalRoute.withName('/'),),
+          Navigator.of(context).pushNamedAndRemoveUntil(
+              'Login', (Route<dynamic> route) => false),
           mensajeCorrecto(message: "Cerraste sesion correctamente"),
         },
         child: const Text(
@@ -426,11 +438,11 @@ class _PaginaPerfilState extends State<PaginaPerfil> {
                       const SizedBox(
                         height: 9.0,
                       ),
-                      _buildContrasena(),
+                      //_buildContrasena(),
                       const SizedBox(
                         height: 20.0,
                       ),
-                      _buildBtnRegistro(),
+                      _buildBtnguardar(),
                       const SizedBox(
                         height: 1.0,
                       ),

@@ -1,5 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import '../widgets/mensajes.dart';
 
 class PaginaAgregarNegocio extends StatefulWidget {
   const PaginaAgregarNegocio({super.key});
@@ -9,6 +13,9 @@ class PaginaAgregarNegocio extends StatefulWidget {
 }
 
 class _PaginaAgregarNegocioState extends State<PaginaAgregarNegocio> {
+  TextEditingController nombreNegocio = TextEditingController();
+  TextEditingController direccion = TextEditingController();
+  TextEditingController telefono = TextEditingController();
 
   Widget _buildNombreNegocio() {
     return Column(
@@ -38,7 +45,8 @@ class _PaginaAgregarNegocioState extends State<PaginaAgregarNegocio> {
             ],
           ),
           height: 45.0,
-          child: const TextField(
+          child: TextField(
+            controller: nombreNegocio,
             keyboardType: TextInputType.name,
             style: TextStyle(
               color: Colors.black,
@@ -91,7 +99,8 @@ class _PaginaAgregarNegocioState extends State<PaginaAgregarNegocio> {
             ],
           ),
           height: 45.0,
-          child: const TextField(
+          child: TextField(
+            controller: direccion,
             keyboardType: TextInputType.name,
             style: TextStyle(
               color: Colors.black,
@@ -115,8 +124,6 @@ class _PaginaAgregarNegocioState extends State<PaginaAgregarNegocio> {
       ],
     );
   }
-
-
 
   Widget _buildTelefono() {
     return Column(
@@ -146,7 +153,8 @@ class _PaginaAgregarNegocioState extends State<PaginaAgregarNegocio> {
             ],
           ),
           height: 45.0,
-          child: const TextField(
+          child: TextField(
+            controller: telefono,
             keyboardType: TextInputType.phone,
             style: TextStyle(
               color: Colors.black,
@@ -171,7 +179,6 @@ class _PaginaAgregarNegocioState extends State<PaginaAgregarNegocio> {
     );
   }
 
-
   Widget _buildBtnRegistro() {
     return Container(
       padding: const EdgeInsets.all(8.0),
@@ -185,11 +192,27 @@ class _PaginaAgregarNegocioState extends State<PaginaAgregarNegocio> {
             elevation: 3,
             //elevation of button
             shape: RoundedRectangleBorder(
-              //to set border radius to button
+                //to set border radius to button
                 borderRadius: BorderRadius.circular(10)),
             padding: const EdgeInsets.all(10) //content padding inside button
-        ),
-        onPressed: () => print('Login Button Pressed'),
+            ),
+        onPressed: () {
+          FirebaseFirestore.instance
+              .collection('dueños')
+              .doc(FirebaseAuth.instance.currentUser!.uid)
+              .collection('negocios')
+              .doc()
+              .set({
+            'nombreNegocio': nombreNegocio.text,
+            'direccion': direccion.text,
+            'telefono': telefono.text
+          }).then((value) {
+            mensajeCorrecto(message: 'El negocio se registro correctamente');
+            Navigator.of(context).pushNamedAndRemoveUntil('PaginaPrincipal', (Route<dynamic> route) => false);
+          }).catchError((e) {
+            mensajeError(message: e);
+          });
+        },
         child: const Text(
           'Guardar negocio',
           style: TextStyle(
@@ -204,19 +227,17 @@ class _PaginaAgregarNegocioState extends State<PaginaAgregarNegocio> {
     );
   }
 
-
-
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const BackButton(color: Color(0xFF109ADA),),
+        leading: const BackButton(
+          color: Color(0xFF109ADA),
+        ),
         backgroundColor: const Color(0xFFEEEEEE),
         centerTitle: true,
-        title: const Text("Agregar negocio",
+        title: const Text(
+          "Agregar negocio",
           style: TextStyle(
             color: Colors.black,
             fontFamily: 'OpenSans',
@@ -252,11 +273,17 @@ class _PaginaAgregarNegocioState extends State<PaginaAgregarNegocio> {
                       const Divider(),
                       const SizedBox(height: 9.0),
                       _buildNombreNegocio(),
-                      const SizedBox(height: 9.0,),
+                      const SizedBox(
+                        height: 9.0,
+                      ),
                       _buildDireccion(),
-                      const SizedBox(height: 9.0,),
+                      const SizedBox(
+                        height: 9.0,
+                      ),
                       _buildTelefono(),
-                      const SizedBox(height: 20.0,),
+                      const SizedBox(
+                        height: 20.0,
+                      ),
                       _buildBtnRegistro(),
                     ],
                   ),

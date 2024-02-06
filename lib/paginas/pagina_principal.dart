@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:miautolavado/paginas/pagina_agregarnegocio.dart';
 import 'package:miautolavado/paginas/pagina_caja.dart';
@@ -14,6 +16,8 @@ class PaginaPrincipal extends StatefulWidget {
 }
 
 class _PaginaPrincipalState extends State<PaginaPrincipal> {
+  List allData = [];
+
   int currentTab = 0;
   final List<Widget> screens = [
     const PaginaResumen(),
@@ -26,34 +30,59 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
   Widget currentScreen = const PaginaResumen();
 
   String? valueChoose;
-  List listItem = ["Negocio 1", "Negocio 2", "Negocio 3"];
+
+
+
 
   PreferredSizeWidget buildAppBarBottom() {
     return PreferredSize(
-      preferredSize:
-          const Size.fromHeight(40), // change height depending on the child height
+      preferredSize: const Size.fromHeight(
+          40), // change height depending on the child height
       child: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          children: [
+            StreamBuilder<QuerySnapshot>(
+                stream: FirebaseFirestore.instance.collection('dueños').doc(FirebaseAuth.instance.currentUser!.uid).collection('negocios').snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return Center(
+                      child: Text("Some error occured ${snapshot.error}"),
+                    );
+                  }
+                  List<DropdownMenuItem> clientItems = [];
+                  if (!snapshot.hasData) {
+                    return const CircularProgressIndicator();
+                  } else {
+                    final clients = snapshot.data?.docs.reversed.toList();
+                    if (clients != null) {
+                      for (var client in clients) {
+                        clientItems.add(
+                          DropdownMenuItem(
+                            value: client.id,
+                            child: Text(
+                              client['nombreNegocio'],
+                            ),
+                          ),
+                        );
+                      }
+                    }
+                  }
+                  return DropdownButton(
+                    alignment: Alignment.center,
+                    hint: const Text("Selecciona un negocio"),
+                    value: valueChoose,
+                    items: clientItems,
+                    onChanged: (newValue) {
+                      setState(() {
+                        valueChoose = newValue as String;
+                        //print(valueChoose);
+                      });
+                    },
+                  );
+                })
             // Text("Selecciona un negocio"),
-            DropdownButton(
-              alignment: Alignment.center,
-              hint: const Text("Selecciona un negocio"),
-              value: valueChoose,
-              onChanged: (newValue) {
-                setState(() {
-                  valueChoose = newValue as String;
-                });
-              },
-              items: listItem.map((valueItem) {
-                return DropdownMenuItem(
-                  value: valueItem,
-                  child: Text(valueItem),
-                );
-              }).toList(),
-            ),
           ],
         ),
       ),
@@ -94,7 +123,7 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
         leading: IconButton(
           iconSize: 30,
           color: const Color(0xFF109ADA),
-          onPressed: (){
+          onPressed: () {
             Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -106,7 +135,7 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
           IconButton(
             iconSize: 30,
             color: const Color(0xFF109ADA),
-            onPressed: (){
+            onPressed: () {
               Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -128,7 +157,7 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
         notchMargin: 10,
-        child: Container(
+        child: SizedBox(
           height: 60,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
